@@ -1,0 +1,77 @@
+Legal, vamos lá:
+
+https://carlosmalltec:developer99%23@github.com/carlosmalltec/php-puro.git
+
+Leia primeiro todo o projeto, faça sua estimativa de horas para o desenvolvimento e me envie como resposta. Esta parte é imprescindível.
+
+Utilize o git e faça commits de forma que possamos analisar como foi desenvolvida a solução por alguma plataforma como Github ou Bitbucket. Ao final, me envie a URL do repositório no Github ou Bitbucket.
+
+Missão 
+
+Desenvolver um CRUD em PHP puro (orientado a objetos e sem utilizar framework) atendendo à especificação abaixo.
+
+Especificação:
+
+Monte uma base de cadastro de devedores e dívidas com, no mínimo, a seguinte estrutura (modelagem de dados importa):
+Nome:   string
+CPF/CNPJ:   integer   
+Data de nascimento:   date
+Endereço: string
+Descrição do título: text
+valor:   float
+Data de vencimento:   date
+updated:   datetime
+Utilize MySQL.
+CREATE TABLE `devedores` (
+	`deve_codi` INT(11) NOT NULL AUTO_INCREMENT,
+	`deve_nome` VARCHAR(100) NULL DEFAULT NULL COMMENT 'Nome completo' COLLATE 'utf8_unicode_ci',
+    `deve_cpf` INT(20) NOT NULL COMMENT 'CPF',
+    `deve_cnpj` INT(20) NOT NULL COMMENT 'CNPJ',
+	`deve_nasc` DATETIME NULL DEFAULT NULL COMMENT 'Data de nascimento',
+	`deve_ende` VARCHAR(150) NOT NULL COMMENT 'Endereço' COLLATE 'utf8_unicode_ci',
+	`deve_desc` TEXT(65535) NULL DEFAULT NULL COMMENT 'Descrição' COLLATE 'utf8_unicode_ci',
+	`deve_valo` DECIMAL(10,2) NULL DEFAULT NULL COMMENT 'Valores',
+
+
+
+	`deve_dcad` TIMESTAMP NULL DEFAULT current_timestamp() COMMENT 'Data de cadastro',
+
+
+
+
+
+	`deve_mail` VARCHAR(150) NOT NULL COMMENT 'E-mail profissional' COLLATE 'utf8_unicode_ci',
+	`deve_site` VARCHAR(150) NULL DEFAULT NULL COMMENT 'Site' COLLATE 'utf8_unicode_ci',
+	`deve_tel` VARCHAR(50) NULL DEFAULT NULL COMMENT 'Telefone' COLLATE 'utf8_unicode_ci',
+	`deve_dcad` TIMESTAMP NULL DEFAULT current_timestamp() COMMENT 'Data de cadastro',
+	`deve_dalt` DATETIME NULL DEFAULT NULL COMMENT 'Data de alteracao',
+	`deve_ucad` INT(11) NOT NULL COMMENT 'Usuario responsavel por cadastrar',
+	`deve_ualt` INT(11) NULL DEFAULT NULL COMMENT 'Usuario responsavel por alterar',
+	`deve_link` VARCHAR(255) NULL DEFAULT NULL COMMENT 'Linkedin.' COLLATE 'utf8_unicode_ci',
+	`deve_stat` DOUBLE(22,0) NULL DEFAULT '1' COMMENT 'status 1 ativo 0 inativo',
+	`deve_face` VARCHAR(150) NULL DEFAULT NULL COMMENT 'Facebook' COLLATE 'utf8_unicode_ci',
+	`deve_sobr` TEXT(65535) NULL DEFAULT NULL COMMENT 'Observações' COLLATE 'utf8_unicode_ci',
+	PRIMARY KEY (`deve_codi`) USING BTREE,
+	UNIQUE INDEX `deve_mail` (`deve_mail`) USING BTREE,
+	UNIQUE INDEX `deve_nome_UNIQUE` (`deve_nome`) USING BTREE,
+	UNIQUE INDEX `deve_tel` (`deve_tel`) USING BTREE,
+	INDEX `fk_deve_ucad_idx` (`deve_ucad`) USING BTREE,
+	INDEX `fk_deve_ualt_idx` (`deve_ualt`) USING BTREE
+)
+COLLATE='utf8_unicode_ci'
+ENGINE=MyISAM
+AUTO_INCREMENT=22
+;
+
+
+A aplicação deve ser cross browser support (chrome, firefox, etc)
+
+Dashboard com indicadores que julgue apropriados (Bônus star)
+
+Escrever teste unitário (Bônus star)
+
+Dica
+Não pode ser utilizado framework PHP, porém para o front podem ser utilizadas ferramentas como bootstrap.
+
+
+Agradecemos sua participação e boa sorte!
