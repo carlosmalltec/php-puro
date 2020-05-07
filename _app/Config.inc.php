@@ -1,7 +1,7 @@
 <?php
 /*caminho da pasat do projeto*/
-define('DIR_ROOT','/xxxx/xxxx/');
-define('URL_ROOT','/xxxxx/xxxx/index.php?exe=');
+define('DIR_ROOT','/application/');
+define('URL_ROOT','/application/index.php?exe=');
 
 // CONFIGRAÇÕES DO SITE ####################
 define('HOST', 'localhost');
@@ -12,7 +12,7 @@ define('DBSA', 'base_devedores');
 // AUTO LOAD DE CLASSES ####################
 function __autoload($Class) {
 
-    $cDir = array('Conn','Models');
+    $cDir = array('conn','models');
     $iDir = null;
 
     foreach ($cDir as $dirName):

@@ -1,3 +1,8 @@
+<?php 
+ // RESPONSÁVEL POR INCLUIR MANIPULADORES, CONEÇÃO COM BD, MÉTODOS, CLASSES DE HELP, FORMATAÇÃO
+require '_app/Config.inc.php';
+$get = filter_input(INPUT_GET, 'exe', FILTER_SANITIZE_SPECIAL_CHARS);
+?>
 <!doctype html>
 <html lang="pt-br">
 
@@ -18,7 +23,23 @@
     <div class="container">
         <?php include '_inc/head_menu.php'; /* MENU */ ?>
         <?php include '_inc/banner.php'; /* BANNER */ ?>
-        <?php include '_inc/listagem.php'; /* LISTA DE CADASTRADOS */ ?>
+        <?php include '_paginas/home.php'; /* LISTAGEM */ ?>
+        <?php 
+              /* QUERY STRING*/              
+              if(!empty($get)){
+                $includepatch = __DIR__.'\\_paginas\\'.strip_tags(trim($get).'.php');
+              }else{
+                $includepatch = __DIR__.'\\_paginas\\home.php';
+              }
+
+              if (file_exists($includepatch)) {
+                require($includepatch);
+              }else{
+                echo '<div class="alert alert-light" role="alert">
+                        Não foi possível incluir o arquivo/página <b>'.$get.'</b>, por favor fale com nosso <a href="#" class="alert-link"> suporte</a>  
+                      </div>';          
+              }
+            ?>
         <?php include '_inc/rodape.php'; /* RODAPÉ */ ?>
         <?php include '_inc/modal.php'; /* MODAL COM FORMULÁRIO DE CADASTRO */ ?>
     </div>
