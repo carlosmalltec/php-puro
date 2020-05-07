@@ -6,13 +6,13 @@ define('URL_ROOT','/application/index.php?exe=');
 // CONFIGRAÇÕES DO SITE ####################
 define('HOST', 'localhost');
 define('USER', 'root');
-define('PASS', 'senha123');
+define('PASS', '');
 define('DBSA', 'base_devedores');
 
 // AUTO LOAD DE CLASSES ####################
 function __autoload($Class) {
 
-    $cDir = array('conn','models');
+    $cDir = array('conn','models','helpers');
     $iDir = null;
 
     foreach ($cDir as $dirName):
