@@ -16,10 +16,11 @@
 
 <body>
     <div class="container">
-        <?php include '_inc/head_menu.php'; /*MENU*/ ?>
-        <?php include '_inc/banner.php'; /*BANNER*/ ?>
-        <?php include '_inc/listagem.php'; /*LISTA DE CADASTRADOS*/ ?>
-        <?php include '_inc/modal.php'; /*MODAL COM FORMULÁRIO DE CADASTRO*/ ?>
+        <?php include '_inc/head_menu.php'; /* MENU */ ?>
+        <?php include '_inc/banner.php'; /* BANNER */ ?>
+        <?php include '_inc/listagem.php'; /* LISTA DE CADASTRADOS */ ?>
+        <?php include '_inc/rodape.php'; /* RODAPÉ */ ?>
+        <?php include '_inc/modal.php'; /* MODAL COM FORMULÁRIO DE CADASTRO */ ?>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
