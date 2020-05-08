@@ -9,14 +9,15 @@ $read->FullRead("select * from devedores order by deve_dcad desc");
 if ($read->getRowCount() >= 1) {
 ?>
     <div class="table-responsive">
-        <table class="table table-bordered table-hover table-sm">
+        <table class="table table-bordered table-hover table-sm" id="listaCliente">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Telefone</th>
                     <th scope="col">E-mail</th>
-                    <th scope="col">CPF/CNPJ</th>
+                    <th scope="col">CPF</th>
+                    <th scope="col">CNPJ</th>
                     <th scope="col">Data de vencimento</th>
                     <th scope="col">Valor R$</th>
                     <th scope="col" style="width: 90px;">Gerenciar</th>
@@ -33,11 +34,12 @@ if ($read->getRowCount() >= 1) {
                         <td><?= $deve_fone; ?></td>
                         <td><?= $deve_mail; ?></td>
                         <td><?= $deve_cpf; ?></td>
+                        <td><?= $deve_cnpj; ?></td>
                         <td><?= $time->diaMesAno($deve_venc); ?></td>
                         <td>R$: <?= number_format($deve_valo, 2, ',', '.'); ?></td>
                         <td style="width: 90px;">
                             <div class="btn-group" role="group" aria-label="controle">
-                                <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#viewDevedor"><i class="fas fa-eye"></i></button>
+                                <button type="button" class="btn btn-outline-info  btnView" data-array="<?=json_encode($result)?>"><i class="fas fa-eye"></i></button>
                                 <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#cadastroDevedores"><i class="fas fa-user-edit"></i></button>
                                 <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button>
                             </div>

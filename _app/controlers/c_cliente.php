@@ -6,16 +6,16 @@ unset($post['acao']);
 $ob_memoria = new Cliente;
 
  switch ($acao) {
-    	case 'cadastrar':
-    		unset($post['deve_codi']);
+		case 'cadastrar':
+    		// unset($post['deve_codi']);
     		$ob_memoria->ExeCreate($post); 
 			if (!$ob_memoria->getResult()):
 				$msg =  '<div class="alert alert-'.$ob_memoria->getError()[1].'" role="alert"> '.$ob_memoria->getError()[0].'</div>';
 				$data = array('acao' => 'error', 'msg' => $msg);
 				echo json_encode($data);
 			else:
-				$msg =  '<div class="alert alert-success" role="alert"> Cadastro com sucesso.</div>';
-				$data = array('acao' => 'success', 'msg' => $msg);
+				$msg =  'Cadastro com sucesso.';
+				$data = array('acao' => 'success', 'msg' => $msg,'dataResult'=>$ob_memoria->getResult());
 				echo json_encode($data);
 			endif;   		
     	break;
