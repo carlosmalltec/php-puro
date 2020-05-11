@@ -36,6 +36,12 @@ DataCliente = {
                         DataCliente.dataResponse.html(r.msg);
                         DataCliente.alertAviso('success','Ooba...',r.msg);
                         $("#cadastroCliente")[0].reset();
+                        setTimeout(function () {
+                            $('#cadastroDevedores').modal('hide')
+                        }, 2000);
+                        setTimeout(function () {
+                            location.reload();
+                        }, 2000);
                     } else {
                         DataCliente.dataResponse.html(r.msg);
                         DataCliente.alertAviso('warning','Oops...',r.msg);
@@ -54,7 +60,7 @@ DataCliente = {
                     DataCliente.alertAviso('error','Oops...','Problema com a conexão, fale com nossa equipe de suporte.');
                     DataCliente.dataResponse.show();
                     DataCliente.btn.removeClass('disabled');
-                    DataCliente.dataResponse.html("<div class='col-xs-12'><p class='alert alert-warning'>Problema com a conexão, fale com nossa equipe de suporte.</p></div>");
+                    DataCliente.dataResponse.html(er);
                 }
             });
         }

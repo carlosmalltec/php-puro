@@ -13,18 +13,34 @@ class Cliente
     private $Error;
     private $Result;
 
+    const IDADE_PERMITIDA = 18;
+
     const Entity = 'devedores';
 
     //Primeiro método create
 
     public function ExeCreate(array $Data)
     {
+        $time = new Time;
+        $helpers = new Helpers;
         $this->Data = $Data;
-        //Verifica se existe campos vazios        
+        //Verifica se existe campos vazios  
+
+        unset($this->Data['deve_codi']);
+
         if (empty($this->Data['deve_nome'])) {
             $this->Result = false;
             $this->Error = array("Campo <strong>Nome</strong> obrigatório", null);
-        } else if (empty($this->Data['deve_fone'])) {
+        }  else if (empty($this->Data['deve_nasc'])) {
+            $this->Result = false;
+            $this->Error = array("Campo <strong>Data de nascimento</strong> é obrigatório", null);
+        }else if (!empty($this->Data['deve_nasc']) && $time->diferencaEntreDatas(date('Y-m-d'),$time->convertToDB($this->Data['deve_nasc']),'y') <= 18) {
+            $this->Result = false;
+            $this->Error = array("<strong>ATENÇÂO</strong> Por favor, verifique a data de nascimento, cliente tem ".$time->diferencaEntreDatas(date('Y-m-d'),$time->convertToDB($this->Data['deve_nasc']),'y'). " anos", null);
+        } else if (!empty($this->Data['deve_nasc']) && $time->diferencaEntreDatas(date('Y-m-d'),$time->convertToDB($this->Data['deve_nasc']),'y') > 100) {
+            $this->Result = false;
+            $this->Error = array("<strong>ATENÇÂO</strong> Por favor, verifique a data de nascimento, cliente tem ".$time->diferencaEntreDatas(date('Y-m-d'),$time->convertToDB($this->Data['deve_nasc']),'y'). " anos", null);
+        }else if (empty($this->Data['deve_fone'])) {
             $this->Result = false;
             $this->Error = array("Campo <strong>Telefone</strong> obrigatório", null);
         } else if (empty($this->Data['deve_venc'])) {
@@ -42,10 +58,12 @@ class Cliente
         } else if (!empty($this->Data['deve_cnpj']) && !empty($this->verificaCNPJ())) {
             $this->Result = false;
             $this->Error = array("<strong>CNPJ</strong> informado já em uso", null);
-        }  else if (!empty($this->verificaNomeTelefoneEmail())) {
+        } else if (!empty($this->verificaNomeTelefoneEmail())) {
             $this->Result = false;
             $this->Error = array("<strong>ATENÇÂO</strong> dados repetidos", null);
-        } else {
+        }else {
+            $this->Data['deve_valo'] = $helpers->converteValor($this->Data['deve_valo']);
+            $this->Data['deve_nasc'] = $time->convertToDB($this->Data['deve_nasc']);
             //Prepara os dados
             $this->setData();
             //faz cadastro no banco
@@ -55,13 +73,48 @@ class Cliente
 
     public function ExeUpdate($IdUpdate, array $Data)
     {
+        $time = new Time;
+        $helpers = new Helpers;
         $this->Data = $Data;
         $this->IdUpdate = (int) $IdUpdate;
         //Verifica se existe campos vazios        
-        if (in_array('', $this->Data)) :
+
+        if (empty($this->Data['deve_nome'])) {
             $this->Result = false;
-            $this->Error = array("Para atualizar preencha todos os campos", WS_ALERT);
-        else :
+            $this->Error = array("Campo <strong>Nome</strong> obrigatório", null);
+        }  else if (empty($this->Data['deve_nasc'])) {
+            $this->Result = false;
+            $this->Error = array("Campo <strong>Data de nascimento</strong> é obrigatório", null);
+        } else if (!empty($this->Data['deve_nasc']) && $time->diferencaEntreDatas(date('Y-m-d'),$time->convertToDB($this->Data['deve_nasc']),'y') <= 18) {
+            $this->Result = false;
+            $this->Error = array("<strong>ATENÇÂO</strong> Por favor, verifique a data de nascimento, cliente tem ".$time->diferencaEntreDatas(date('Y-m-d'),$time->convertToDB($this->Data['deve_nasc']),'y'). " anos", null);
+        } else if (!empty($this->Data['deve_nasc']) && $time->diferencaEntreDatas(date('Y-m-d'),$time->convertToDB($this->Data['deve_nasc']),'y') > 100) {
+            $this->Result = false;
+            $this->Error = array("<strong>ATENÇÂO</strong> Por favor, verifique a data de nascimento, cliente tem ".$time->diferencaEntreDatas(date('Y-m-d'),$time->convertToDB($this->Data['deve_nasc']),'y'). " anos", null);
+        }else if (empty($this->Data['deve_fone'])) {
+            $this->Result = false;
+            $this->Error = array("Campo <strong>Telefone</strong> obrigatório", null);
+        } else if (empty($this->Data['deve_venc'])) {
+            $this->Result = false;
+            $this->Error = array("Campo <strong>Data de vencimento</strong> obrigatório", null);
+        } else if (empty($this->Data['deve_valo'])) {
+            $this->Result = false;
+            $this->Error = array("Campo <strong>Valor R$</strong> obrigatório", null);
+        } else if ($this->Data['deve_valo'] < 1) {
+            $this->Result = false;
+            $this->Error = array("O valor precisa ser maior que 0 ", null);
+        } else if (!empty($this->Data['deve_cpf']) && !empty($this->verificaCPF(true))) {
+            $this->Result = false;
+            $this->Error = array("<strong>CPF</strong> informado já em uso", null);
+        } else if (!empty($this->Data['deve_cnpj']) && !empty($this->verificaCNPJ(true))) {
+            $this->Result = false;
+            $this->Error = array("<strong>CNPJ</strong> informado já em uso", null);
+        } else if (!empty($this->verificaNomeTelefoneEmail(true))) {
+            $this->Result = false;
+            $this->Error = array("<strong>ATENÇÂO</strong> dados repetidos", null);
+        }else {
+            $this->Data['deve_valo'] = $helpers->converteValor($this->Data['deve_valo']);
+            $this->Data['deve_nasc'] = $time->convertToDB($this->Data['deve_nasc']);
             //Prepara os dados
             $this->setData();
 
@@ -71,7 +124,7 @@ class Cliente
             //faz update no banco
             $this->Update();
 
-        endif;
+        }
     }
 
     public function ExeDelete($id)
@@ -111,24 +164,38 @@ class Cliente
         // $this->Data['cli_codigo'] = substr(md5(uniqid()), 0, 9);
     }
 
-    private function verificaCPF()
+    private function verificaCPF($update = false)
     {
         $readName = new Read;
+        if($update){
+        $readName->ExeRead(self::Entity, "where deve_cpf = :cpf and deve_codi != :id", "cpf={$this->Data['deve_cpf']}&id={$this->Data['deve_codi']}");
+        }else{
         $readName->ExeRead(self::Entity, "where deve_cpf = :cpf", "cpf={$this->Data['deve_cpf']}");
+        }
         return $readName->getResult();
     }
 
-    private function verificaCNPJ()
+    private function verificaCNPJ($update = false)
     {
         $readName = new Read;
-        $readName->ExeRead(self::Entity, "where deve_cnpj = :cnpj", "cnpj={$this->Data['deve_cnpj']}");
+        if($update){
+            $readName->ExeRead(self::Entity, "where deve_cnpj = :cnpj and deve_codi != :id", "cnpj={$this->Data['deve_cnpj']}&id={$this->Data['deve_codi']}");
+
+        }else{
+            $readName->ExeRead(self::Entity, "where deve_cnpj = :cnpj", "cnpj={$this->Data['deve_cnpj']}");
+
+        }
         return $readName->getResult();
     }
 
-    private function verificaNomeTelefoneEmail()
+    private function verificaNomeTelefoneEmail($update = false)
     {
         $readName = new Read;
-        $readName->ExeRead(self::Entity, "where deve_nome = :nome and deve_fone = :fone and deve_mail = :mail", "nome={$this->Data['deve_nome']}&fone={$this->Data['deve_fone']}&mail={$this->Data['deve_mail']}");
+        if($update){
+        $readName->ExeRead(self::Entity, "where deve_nome = :nome and deve_fone = :fone and deve_mail = :mail  and deve_codi != :id", "nome={$this->Data['deve_nome']}&fone={$this->Data['deve_fone']}&mail={$this->Data['deve_mail']}&id={$this->Data['deve_codi']}");
+        }else{
+            $readName->ExeRead(self::Entity, "where deve_nome = :nome and deve_fone = :fone and deve_mail = :mail", "nome={$this->Data['deve_nome']}&fone={$this->Data['deve_fone']}&mail={$this->Data['deve_mail']}");
+        }
         return $readName->getResult();
     }
 
@@ -152,7 +219,8 @@ class Cliente
         $Update->ExeUpdate(self::Entity, $this->Data, "WHERE deve_codi =:id", "id=" . $this->IdUpdate);
         if ($Update->getResult()) :
             $this->Result = true;
-            $this->Error = array("Cliente foi {$this->Data['deve_nome']} atualizado com sucesso", WS_ACCEPT);
+            $this->Error = array("Cliente {$this->Data['deve_nome']} atualizado com sucesso", null);
+            // $this->Error = array("Cliente foi {$this->Data['deve_nome']} atualizado com sucesso", WS_ACCEPT);
         endif;
     }
 }

@@ -2,7 +2,7 @@
     <div class="modal-dialog  modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Preencha todos os campos</h5>
+                <h5 class="modal-title" id="modalCadastro">Preencha todos os campos</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -24,8 +24,8 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="datanascimento">Data de nascimento</label>
-                                <input type="text" name="deve_nasc" class="form-control" id="datanascimento" aria-describedby="datanascimentoHelp" placeholder="dd/mm/yyyy">
+                                <label for="datanascimento">Data de nascimento <span class="text-danger">*</span></label>
+                                <input type="date" name="deve_nasc" class="form-control" id="datanascimento" aria-describedby="datanascimentoHelp" placeholder="dd/mm/yyyy">
                                 <small id="datanascimentoHelp" class="form-text text-muted"></small>
                             </div>
                         </div>
@@ -66,7 +66,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="valor">Valor R$ <span class="text-danger">*</span></label>
-                                <input type="text" name="deve_valo" class="form-control" id="valor" aria-describedby="valorHelp" placeholder="10.99">
+                                <input type="text" name="deve_valo" class="form-control" id="valor" aria-describedby="valorHelp" placeholder="1,99">
                                 <small id="valorHelp" class="form-text text-muted"></small>
                             </div>
                         </div>
@@ -83,6 +83,7 @@
                         <textarea class="form-control" name="deve_desc" id="observacoes" rows="3" aria-describedby="deve_desc" placeholder="Observações"></textarea>
                         <small id="observacoesHelp" class="form-text text-muted"></small>
                     </div>
+                    <input type="hidden" name="deve_codi" value="">
                     <input type="hidden" name="acao" value="cadastrar">
                     <div id="response"></div>
                     <button type="submit" class="btn btn-primary btnSalve">Salvar</button>
@@ -96,22 +97,13 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalDevedor">Devedor: Carlos Santos</h5>
+                <h5 class="modal-title" id="modalDevedor"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <p><strong>ID:</strong> 1</p>
-                <p><strong>Nome:</strong> Carlos Santos</p>
-                <p><strong>E-mail:</strong> Carlos Santos</p>
-                <p><strong>Telefone:</strong> Carlos Santos</p>
-                <p><strong>CPF/CNPJ:</strong> Carlos Santos</p>
-                <p><strong>Data de nascimento:</strong> Carlos Santos</p>
-                <p><strong>Endereço:</strong> Carlos Santos</p>
-                <p><strong>Observações:</strong> Carlos Santos</p>
-                <p><strong>Data de vencimento:</strong> Carlos Santos</p>
-                <p><strong>Valor R$:</strong> Carlos Santos</p>
+            <div class="modal-body toogle-view">
+                
             </div>
         </div>
     </div>

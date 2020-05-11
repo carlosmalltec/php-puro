@@ -28,9 +28,9 @@ $get = filter_input(INPUT_GET, 'exe', FILTER_SANITIZE_SPECIAL_CHARS);
         <?php 
               /* QUERY STRING*/              
               if(!empty($get)){
-                $includepatch = __DIR__.'\\_paginas\\'.strip_tags(trim($get).'.php');
+                $includepatch = __DIR__.'//_paginas//'.strip_tags(trim($get).'.php');
               }else{
-                $includepatch = __DIR__.'\\_paginas\\home.php';
+                $includepatch = __DIR__.'//_paginas//home.php';
               }
 
               if (file_exists($includepatch)) {
@@ -48,8 +48,11 @@ $get = filter_input(INPUT_GET, 'exe', FILTER_SANITIZE_SPECIAL_CHARS);
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="_assets/helpers/helper.js"></script>
     <script src="_assets/cliente/cadastro.js"></script>
     <script src="_assets/cliente/view.js"></script>
+    <script src="_assets/cliente/update.js"></script>
+    <script src="_assets/cliente/delete.js"></script>
 
     
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
@@ -63,7 +66,7 @@ $get = filter_input(INPUT_GET, 'exe', FILTER_SANITIZE_SPECIAL_CHARS);
               $("#telefone").mask("(99) 9999-99999", { autoclear: false });
               $("#cpf").mask("999.999.99-99", { autoclear: false });
               $("#cnpj").mask("99.999.999/9999-99", { autoclear: false });
-              $("#datanascimento").mask("99/99/9999", { autoclear: false });
+              // $("#datanascimento").mask("99/99/9999", { autoclear: false });
         });
         
     </script>

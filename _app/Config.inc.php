@@ -4,9 +4,9 @@ define('DIR_ROOT','/application/');
 define('URL_ROOT','/application/index.php?exe=');
 
 // CONFIGRAÇÕES DO SITE ####################
-define('HOST', 'localhost');
+define('HOST', 'deve_mariadb');
 define('USER', 'root');
-define('PASS', '');
+define('PASS', 'senha123');
 define('DBSA', 'base_devedores');
 
 // AUTO LOAD DE CLASSES ####################
@@ -16,8 +16,8 @@ function __autoload($Class) {
     $iDir = null;
 
     foreach ($cDir as $dirName):
-        if (!$iDir && file_exists(__DIR__ . "\\{$dirName}\\{$Class}.class.php") && !is_dir(__DIR__ . "\\{$dirName}\\{$Class}.class.php")):
-            include_once (__DIR__ . "\\{$dirName}\\{$Class}.class.php");
+        if (!$iDir && file_exists(__DIR__ . "//{$dirName}//{$Class}.class.php") && !is_dir(__DIR__ . "//{$dirName}//{$Class}.class.php")):
+            include_once (__DIR__ . "//{$dirName}//{$Class}.class.php");
             $iDir = true;
         endif;
     endforeach;
