@@ -1,4 +1,4 @@
-CONFIGURAÇÃO
+CONFIGURAÇÃO DO SISTEMA DE DEVEDORES
 -------------
 
 ### Ferramentas utilizadas:
@@ -22,3 +22,12 @@ O script da tabela está na pasta sql
 Depois de tudo verificado, acesse a raiz do projeto e rode via terminal docker-compose up;
 
 acesse http://localhost/ e faça os testes.
+
+
+![Início](https://github.com/carlosmalltec/php-puro/blob/master/screenshot/inicio.png)
+![Cadastro](https://github.com/carlosmalltec/php-puro/blob/master/screenshot/cadastro.png)
+![Validacao](https://github.com/carlosmalltec/php-puro/blob/master/screenshot/validacao.png)
+![View](https://github.com/carlosmalltec/php-puro/blob/master/screenshot/view.png)
+![Editar](https://github.com/carlosmalltec/php-puro/blob/master/screenshot/editar.png)
+![Delete](https://github.com/carlosmalltec/php-puro/blob/master/screenshot/delete.png)
+![Lista](https://github.com/carlosmalltec/php-puro/blob/master/screenshot/lista.png)
