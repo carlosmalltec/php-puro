@@ -10,7 +10,7 @@ CONFIGURAÇÃO
 ### Configuração para Windows:
 - Clone do repositório;
 - _app/Config.inc.php altere os dados de conexão do banco de dados
-- altere as '//' para " \\ " o mesmo para _app/Config.inc.php e index.php da raiz da pasta application
+- altere as '//' para <b>\\</b>  o mesmo para _app/Config.inc.php e index.php da raiz da pasta application
 
 * Este passo nao precisa ser feito para MacOS ou Linux.
 
